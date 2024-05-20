@@ -15,9 +15,9 @@ const TABLE_NAME='ClimateTechList'
 
     const jobListings=(await page).evaluate(()=>{
         const jobs=[]
-        const jobElements=document.querySelector('.job-listing')
+        const jobElements=document.querySelector('.job-listing')    
 
-        jobElements.forEach(job=>{
+        jobElements.forEach(jobs=>{
             const jobTitle=document.querySelector('.job-title').innerText;
 
             const name=document.querySelector('.company-name').innerText;
@@ -34,7 +34,7 @@ const TABLE_NAME='ClimateTechList'
     console.log("Job listings");
     console.log(jobListings);
 
-    
+
     const extractDetails=async(jobURL)=>{
         const jobPage=(await browser).newPage();
         (await jobPage).goto(jobURL,{waitUntil: 'networkidle2'})
