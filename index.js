@@ -1,3 +1,4 @@
+
 const puppeteer=require('puppeteer');
 const AWS=require('aws-sdk')
 
@@ -86,4 +87,3 @@ const TABLE_NAME='ClimateTechList'
     }
     (await browser).close()
 })();
-
