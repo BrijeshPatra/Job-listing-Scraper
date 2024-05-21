@@ -10,15 +10,15 @@ const TABLE_NAME='ClimateTechList'
 
 (async()=>{
     const browser=puppeteer.launch();
-    const page=(await browser).newPage();
+    const page=await browser.newPage();
 
-    (await page).goto('https://www.climatetechlist.com/jobs',{waitUntil: 'networkidle2'})
+    await page.goto('https://www.climatetechlist.com/jobs',{waitUntil: 'networkidle2'})
 
-    const jobListings=(await page).evaluate(()=>{
+    const jobListings=await page.evaluate(()=>{
         const jobs=[]
-        const jobElements=document.querySelector('.job-listing')    
+        const jobElements=document.querySelectorAll('.job-listing')    
 
-        jobElements.forEach(jobs=>{
+        jobElements.forEach(job=>{
             const jobTitle=document.querySelector('.job-title').innerText;
 
             const name=document.querySelector('.company-name').innerText;
@@ -37,10 +37,10 @@ const TABLE_NAME='ClimateTechList'
 
 
     const extractDetails=async(jobURL)=>{
-        const jobPage=(await browser).newPage();
-        (await jobPage).goto(jobURL,{waitUntil: 'networkidle2'})
+        const jobPage=await browser.newPage();
+        await jobPage.goto(jobURL,{waitUntil: 'networkidle2'})
 
-        const jobDetails=(await jobPage).evaluate(()=>{
+        const jobDetails=await jobPage.evaluate(()=>{
             const description=document.querySelector('.job-description').innerText
 
             const companyWebsite=document.querySelector('.company-website a')?.href || ' '
@@ -59,7 +59,7 @@ const TABLE_NAME='ClimateTechList'
                 companyFunding
             }
         })
-        (await jobPage).close()
+        await jobPage.close()
         return jobDetails;
     }
 
@@ -85,5 +85,5 @@ const TABLE_NAME='ClimateTechList'
             console.error(`Error storing job ${job.jobTitle}`,error)
         }
     }
-    (await browser).close()
+    await browser.close()
 })();
