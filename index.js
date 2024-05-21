@@ -23,11 +23,11 @@ const TABLE_NAME='ClimateTechList'
 
             const name=document.querySelector('.company-name').innerText;
 
-            const location=document.querySelector('.job-location').innerText;
+            const Location=document.querySelector('location').innerText;
 
             const URL=document.querySelector('.job-title a').href;
 
-            jobs.push({jobTitle,name,location,URL})
+            jobs.push({jobTitle,name,Location,URL})
         })
         return jobs;
     })
